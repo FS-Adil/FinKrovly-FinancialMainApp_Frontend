@@ -1,0 +1,1 @@
+# FinKrovly-FinancialMainApp_Frontend
