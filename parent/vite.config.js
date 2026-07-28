@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    // Защитные заголовки для dev сервера
     headers: {
       'X-Frame-Options': 'DENY',
       'X-Content-Type-Options': 'nosniff',
@@ -14,14 +13,17 @@ export default defineConfig({
     }
   },
   build: {
-    // Production оптимизации
     target: 'es2015',
-    minify: 'terser',
+    minify: 'oxc', // ← Oxc — новый встроенный минификатор Vite 8
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'vendor';
+            }
+          }
         }
       }
     }
