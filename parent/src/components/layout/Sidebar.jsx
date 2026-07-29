@@ -18,8 +18,9 @@ const Sidebar = ({ collapsed, onLogout }) => {
     <nav className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Заголовок */}
       <div className="sidebar-header">
-        {!collapsed && <h2>Micro Frontend</h2>}
-        {collapsed && <span className="logo-small">MF</span>}
+        {!collapsed && <h2>Digital Holding</h2>}
+        {!collapsed && <p className="sidebar-logo-subtitle"> Цифровые ФИНАНСОВЫЕ сервисы</p>}
+        {collapsed && <span className="sidebar-logo-small">DH</span>}
       </div>
 
       {/* Навигационное меню */}
@@ -33,12 +34,17 @@ const Sidebar = ({ collapsed, onLogout }) => {
               }
               title={app.name}
             >
-              <span className="nav-icon" aria-hidden="true">
+              {/* <span className="nav-icon" aria-hidden="true">
                 {XSSProtection.escapeHTML(app.icon)}
-              </span>
+              </span> */}
               {!collapsed && (
                 <span className="nav-label">
                   {XSSProtection.escapeHTML(app.menuLabel)}
+                </span>
+              )}
+              {collapsed && (
+                <span className="nav-label">
+                  {XSSProtection.escapeHTML(app.smallMenuLabel)}
                 </span>
               )}
             </NavLink>
