@@ -26,7 +26,7 @@ body {
 }
 
 .sidebar-container.collapsed {
-  width: 60px;
+  width: 80px;
 }
 
 .sidebar {
@@ -43,8 +43,30 @@ body {
 }
 
 .sidebar-header h2 {
-  font-size: 18px;
+  font-size: 1.5rem;
   font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.sidebar-logo-small {
+  font-size: 1.3rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+
+.sidebar-logo-subtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
 }
 
 /* Навигация */

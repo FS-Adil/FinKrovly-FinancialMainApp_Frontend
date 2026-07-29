@@ -12,8 +12,13 @@
                  style-src 'self' 'unsafe-inline'; 
                  img-src 'self' data: https:; 
                  font-src 'self' data:; 
-                 connect-src 'self' http://localhost:8383 https://auth.backend.finkrovl.ru; 
-                 frame-src 'self' http://localhost:*; 
+                 connect-src 'self' 
+                 http://localhost:8383 
+                 https://auth.backend.finkrovl.ru; 
+                 frame-src 'self' 
+                 https://micro-frontend-1.yourdomain.ru 
+                 https://micro-frontend-2.yourdomain.ru
+                 http://localhost:*; 
                  frame-ancestors 'none';" />
   
   <!-- Защита от CSRF -->

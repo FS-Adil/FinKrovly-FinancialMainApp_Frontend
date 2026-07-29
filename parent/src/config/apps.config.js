@@ -15,17 +15,19 @@ export const childApps = [
     // Уникальный идентификатор
     id: 'app1',
     // Название приложения
-    name: 'CRM System',
+    name: 'Махачкала ФК',
     // Описание
-    description: 'Customer Relationship Management',
+    description: 'Махачкала ФК',
     // Иконка для меню
-    icon: '👥',
+    icon: '📊',
     // URL дочернего приложения
-    url: import.meta.env.VITE_APP1_URL || 'http://localhost:3001',
+    url: import.meta.env.VITE_APP1_URL,
     // Путь в роутере родительского приложения
     path: '/app1',
     // Название в меню
-    menuLabel: 'CRM',
+    menuLabel: 'Махачкала ФК',
+    // Название в меню
+    smallMenuLabel: 'М ФК',
     // Требуется ли авторизация родителя
     requireParentAuth: true,
     // Настройки передачи токена
@@ -38,37 +40,125 @@ export const childApps = [
   },
   {
     id: 'app2',
-    name: 'Analytics Dashboard',
-    description: 'Data Analytics Platform',
+    name: 'Махачкала НК',
+    description: 'Махачкала НК',
     icon: '📊',
-    url: import.meta.env.VITE_APP2_URL || 'http://localhost:3002',
+    url: import.meta.env.VITE_APP2_URL,
     path: '/app2',
-    menuLabel: 'Analytics',
+    menuLabel: 'Махачкала НК',
+    smallMenuLabel: 'М НК',
     requireParentAuth: true,
     authConfig: {
       tokenTransferMethod: 'postMessage',
-      tokenKey: 'auth_token'
+      tokenKey: 'parent_token'
     }
-  }
-  
-  // ПРИМЕР ДОБАВЛЕНИЯ НОВОГО ПРИЛОЖЕНИЯ:
-  // Раскомментируйте и настройте под свое приложение
-  /*
+  },
   {
     id: 'app3',
-    name: 'Document Manager',
-    description: 'Document Management System',
-    icon: '📄',
-    url: import.meta.env.VITE_APP3_URL || 'http://localhost:3003',
+    name: 'Дербент НК',
+    description: 'Дербент НК',
+    icon: '📊',
+    url: import.meta.env.VITE_APP3_URL,
     path: '/app3',
-    menuLabel: 'Documents',
+    menuLabel: 'Дербент НК',
+    smallMenuLabel: 'Д НК',
     requireParentAuth: true,
     authConfig: {
       tokenTransferMethod: 'postMessage',
-      tokenKey: 'token'
+      tokenKey: 'parent_token'
+    }
+  },
+  {
+    id: 'app4',
+    name: 'Астрахань ФК',
+    description: 'Астрахань ФК',
+    icon: '📊',
+    url: import.meta.env.VITE_APP4_URL,
+    path: '/app4',
+    menuLabel: 'Астрахань ФК',
+    smallMenuLabel: 'А ФК',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
+    }
+  },
+  {
+    id: 'app5',
+    name: 'Астрахань СД',
+    description: 'Астрахань СД',
+    icon: '📊',
+    url: import.meta.env.VITE_APP5_URL,
+    path: '/app5',
+    menuLabel: 'Астрахань СД',
+    smallMenuLabel: 'А СД',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
+    }
+  },
+  {
+    id: 'app6',
+    name: 'Пятигорск Кровля',
+    description: 'Пятигорск Кровля',
+    icon: '📊',
+    url: import.meta.env.VITE_APP6_URL,
+    path: '/app6',
+    menuLabel: 'Пятигорск Кровля',
+    smallMenuLabel: 'ПК',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
+    }
+  },
+    {
+    id: 'app7',
+    name: 'Пятигорск Вентиляция',
+    description: 'Пятигорск Вентиляция',
+    icon: '📊',
+    url: import.meta.env.VITE_APP7_URL,
+    path: '/app7',
+    menuLabel: 'Пятигорск Вентиляция',
+    smallMenuLabel: 'ПВ',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
+    }
+  },
+  {
+    id: 'app8',
+    name: 'Ростов',
+    description: 'Ростов',
+    icon: '📊',
+    url: import.meta.env.VITE_APP8_URL,
+    path: '/app8',
+    menuLabel: 'Ростов',
+    smallMenuLabel: 'Р',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
+    }
+  },
+  {
+    id: 'app9',
+    name: 'Москва',
+    description: 'Москва',
+    icon: '📊',
+    url: import.meta.env.VITE_APP9_URL,
+    path: '/app9',
+    menuLabel: 'Москва',
+    smallMenuLabel: 'М',
+    requireParentAuth: true,
+    authConfig: {
+      tokenTransferMethod: 'postMessage',
+      tokenKey: 'parent_token'
     }
   }
-  */
+
 ];
 
 /**
