@@ -338,3 +338,188 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* ... существующие стили ... */
+
+/* 🔥 Контейнер микро-приложения */
+.micro-app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 Заголовок приложения */
+.app-header {
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.app-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.app-description {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 🔥 Элементы управления */
+.app-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.loading {
+  background: #fff3cd;
+  color: #856404;
+  animation: pulse 1.5s infinite;
+}
+
+.status-badge.loaded {
+  background: #d4edda;
+  color: #155724;
+}
+
+.reload-btn {
+  padding: 4px 10px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #495057;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.reload-btn:hover {
+  background: #e9ecef;
+  border-color: #ced4da;
+}
+
+.reload-btn:active {
+  background: #dee2e6;
+}
+
+/* 🔥 Контейнер iframe */
+.secure-iframe-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.secure-iframe-container.cached {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🔥 Индикатор загрузки */
+.iframe-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  z-index: 1;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* 🔥 Ошибки */
+.app-error {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+.app-error h2 {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.app-error button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.iframe-error {
+  padding: 30px;
+  text-align: center;
+  background: #fde8e8;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.iframe-error h3 {
+  color: #c0392b;
+  margin-bottom: 10px;
+}
+
+.iframe-error button {
+  margin: 5px;
+  padding: 8px 16px;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.iframe-error button:last-child {
+  background: #3498db;
+}
+
+/* Загрузка */
+.app-loading {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}

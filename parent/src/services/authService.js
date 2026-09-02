@@ -4,8 +4,9 @@ import { SecurityUtils } from '../utils/security';
 /**
  * Сервис аутентификации
  * 
+ * ВАЖНО: Мы НЕ храним JWT токены на клиенте!
+ * Токены передаются в HttpOnly cookies автоматически.
  */
-
 class AuthService {
   // Приватные константы для валидации
   #REQUIRED_USER_FIELDS = ['id', 'email', 'role'];
@@ -31,11 +32,7 @@ class AuthService {
       return true;
     }
     
-    if (attempts >= this.#MAX_LOGIN_ATTEMPTS) {
-      return false;
-    }
-    
-    return true;
+    return attempts < this.#MAX_LOGIN_ATTEMPTS;
   }
 
   /**
@@ -92,7 +89,6 @@ class AuthService {
     const stringFields = ['email', 'name', 'role'];
     for (const field of stringFields) {
       if (userData[field] && typeof userData[field] === 'string') {
-        // Проверяем на наличие потенциально опасных символов
         if (/[<>{}]/.test(userData[field])) {
           return false;
         }
@@ -107,7 +103,6 @@ class AuthService {
    * @private
    */
   #extractUserData(responseData) {
-    // Проверяем что ответ вообще существует
     if (!responseData || typeof responseData !== 'object') {
       return null;
     }
@@ -120,6 +115,8 @@ class AuthService {
       userData = responseData.user;
     } else if (Object.prototype.hasOwnProperty.call(responseData, 'id')) {
       userData = responseData;
+    } else {
+      return null;
     }
 
     // Валидируем извлеченные данные
@@ -128,15 +125,12 @@ class AuthService {
     }
 
     // Создаем новый объект только с разрешенными полями
-    // Это предотвращает передачу лишних данных
-    const sanitizedUser = {
+    return {
       id: userData.id,
       email: SecurityUtils.validateEmail(userData.email) || userData.email,
       name: userData.name ? SecurityUtils.sanitizeInput(userData.name) : '',
       role: userData.role
     };
-
-    return sanitizedUser;
   }
 
   /**
@@ -212,7 +206,6 @@ class AuthService {
       }
 
       // Всегда возвращаем одинаковое сообщение об ошибке
-      // чтобы нельзя было определить существует ли пользователь
       return {
         success: false,
         error: 'Invalid credentials'
@@ -273,7 +266,6 @@ class AuthService {
     } catch (error) {
       // Игнорируем ошибки при выходе
     } finally {
-      // Всегда возвращаем успех и очищаем состояние
       return { success: true };
     }
   }
