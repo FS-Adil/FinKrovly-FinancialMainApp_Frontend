@@ -43,7 +43,7 @@ export const childApps = [
     name: 'Махачкала НК',
     description: 'Махачкала НК',
     icon: '📊',
-    url: import.meta.env.VITE_APP2_URL,
+    url: import.meta.env.VITE_APP1_URL,
     path: '/app2',
     menuLabel: 'Махачкала НК',
     smallMenuLabel: 'М НК',
@@ -58,7 +58,7 @@ export const childApps = [
     name: 'Дербент НК',
     description: 'Дербент НК',
     icon: '📊',
-    url: import.meta.env.VITE_APP3_URL,
+    url: import.meta.env.VITE_APP1_URL,
     path: '/app3',
     menuLabel: 'Дербент НК',
     smallMenuLabel: 'Д НК',
@@ -174,7 +174,7 @@ export const defaultAppConfig = {
     allowScripts: true,
     allowForms: true,
     allowPopups: false,
-    allowSameOrigin: false,
+    allowSameOrigin: true,
     allowTopNavigation: false
   }
 };

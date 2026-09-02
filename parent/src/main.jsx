@@ -12,7 +12,7 @@ import './index.css';
  * - Frame busting в index.html
  */
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>
+  // {/* </React.StrictMode> */}
 );
