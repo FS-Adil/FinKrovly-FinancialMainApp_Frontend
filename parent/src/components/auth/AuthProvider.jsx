@@ -56,9 +56,8 @@ export const AuthProvider = ({ children }) => {
             id: SecurityUtils.sanitizeInput(String(result.user.id)),
             email: SecurityUtils.validateEmail(result.user.email),
             name: SecurityUtils.sanitizeInput(result.user.name || ''),
-            roles: Array.isArray(result.user.roles) 
-              ? result.user.roles.map(role => SecurityUtils.sanitizeInput(role))
-              : ['ROLE_USER']
+            role: SecurityUtils.sanitizeInput(userData.role),
+            roles: [SecurityUtils.sanitizeInput(userData.role)]
           };
 
           setUser(validatedUser);
@@ -158,9 +157,8 @@ export const AuthProvider = ({ children }) => {
           id: SecurityUtils.sanitizeInput(String(result.user.id)),
           email: SecurityUtils.validateEmail(result.user.email),
           name: SecurityUtils.sanitizeInput(result.user.name || ''),
-          roles: Array.isArray(result.user.roles) 
-            ? result.user.roles.map(role => SecurityUtils.sanitizeInput(role))
-            : ['ROLE_USER']
+          role: SecurityUtils.sanitizeInput(userData.role),
+          roles: [SecurityUtils.sanitizeInput(userData.role)]
         };
 
         setUser(validatedUser);
@@ -211,7 +209,8 @@ export const AuthProvider = ({ children }) => {
           id: SecurityUtils.sanitizeInput(String(result.user.id)),
           email: SecurityUtils.validateEmail(result.user.email),
           name: SecurityUtils.sanitizeInput(result.user.name || ''),
-          roles: ['ROLE_USER']
+          role: SecurityUtils.sanitizeInput(userData.role),
+          roles: [SecurityUtils.sanitizeInput(userData.role)]
         };
 
         setUser(validatedUser);
@@ -275,9 +274,8 @@ export const AuthProvider = ({ children }) => {
           id: SecurityUtils.sanitizeInput(String(result.user.id)),
           email: SecurityUtils.validateEmail(result.user.email),
           name: SecurityUtils.sanitizeInput(result.user.name || ''),
-          roles: Array.isArray(result.user.roles) 
-            ? result.user.roles.map(role => SecurityUtils.sanitizeInput(role))
-            : ['ROLE_USER']
+          role: SecurityUtils.sanitizeInput(userData.role),
+          roles: [SecurityUtils.sanitizeInput(userData.role)]
         };
         setUser(validatedUser);
       }
