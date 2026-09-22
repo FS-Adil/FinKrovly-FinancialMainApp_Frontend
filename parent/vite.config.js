@@ -13,8 +13,10 @@ export default defineConfig({
       //   "style-src 'self' 'unsafe-inline'",
       //   "img-src 'self' data: https:",
       //   "font-src 'self' data:",
-        "connect-src 'self' http://localhost:8383 http://localhost:8181", // PRODUCTION: https://api.yourdomain.com https://app1.yourdomain.com
-        "frame-src 'self' http://localhost:3001 http://localhost:3002", // PRODUCTION: https://app1.yourdomain.com https://app2.yourdomain.com
+        // "connect-src 'self' http://localhost:8383 http://localhost:8181",
+        "connect-src 'self' https://auth.backend.finkrovl.ru https://childs.finance.finkrovl.ru",
+        // "frame-src 'self' http://localhost:3001 http://localhost:3002",
+        "frame-src 'self'  https://childs.finance.finkrovl.ru", 
       ].join('; '),
     //   // PRODUCTION: Добавить
     //   'X-Frame-Options': 'SAMEORIGIN',
