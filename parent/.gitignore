@@ -25,4 +25,5 @@ dist-ssr
 
 .env
 .nginx_conf
+.prod.env
 

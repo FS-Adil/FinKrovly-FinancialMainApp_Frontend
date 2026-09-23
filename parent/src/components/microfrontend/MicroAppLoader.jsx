@@ -125,11 +125,22 @@ const MicroAppLoader = () => {
       background: white;
     `;
 
-    const sandboxAttrs = ['allow-scripts', 'allow-forms', 'allow-same-origin']
-      .filter(attr => {
-        const key = attr.replace('allow-', 'allow').replace(/-./g, x => x[1].toUpperCase());
-        return defaultAppConfig.sandbox?.[key] !== false;
-      })
+    // const sandboxAttrs = ['allow-scripts', 'allow-forms', 'allow-same-origin', 'allow-downloads']
+    //   .filter(attr => {
+    //     const key = attr.replace('allow-', 'allow').replace(/-./g, x => x[1].toUpperCase());
+    //     return defaultAppConfig.sandbox?.[key] !== false;
+    //   })
+    //   .join(' ');
+
+    const sandboxAttrs = [
+      defaultAppConfig.sandbox?.allowScripts && 'allow-scripts',
+      defaultAppConfig.sandbox?.allowForms && 'allow-forms',
+      defaultAppConfig.sandbox?.allowSameOrigin && 'allow-same-origin',
+      defaultAppConfig.sandbox?.allowDownloads && 'allow-downloads',
+      defaultAppConfig.sandbox?.allowPopups && 'allow-popups',
+      defaultAppConfig.sandbox?.allowTopNavigation && 'allow-top-navigation',
+    ]
+      .filter(Boolean)
       .join(' ');
 
     const iframe = document.createElement('iframe');
