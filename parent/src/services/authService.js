@@ -180,18 +180,22 @@ class AuthService {
 
       if (!userData) {
         this.#incrementAttempts(email);
-        return { 
-          success: false, 
-          error: 'Invalid credentials' 
-        };
+        return { success: false, error: 'Invalid credentials' };
       }
 
-      // Сбрасываем счетчик при успешном входе
+      // 🔑 Достаём accessToken из ответа 8383
+      const accessToken = response.data?.accessToken || null;
+
+      if (!accessToken) {
+        console.warn('8383 did not return accessToken');
+      }
+
       this.#resetAttempts(email);
 
       return {
         success: true,
-        user: userData
+        user: userData,
+        accessToken                    // ← возвращаем наружу
       };
 
     } catch (error) {
@@ -273,29 +277,48 @@ class AuthService {
   /**
    * Проверка текущей сессии
    */
+  // async checkSession() {
+  //   try {
+  //     const response = await axiosInstance.get('/api/auth/me');
+      
+  //     const userData = this.#extractUserData(response.data);
+      
+  //     if (!userData) {
+  //       return {
+  //         success: false,
+  //         user: null
+  //       };
+  //     }
+
+  //     return {
+  //       success: true,
+  //       user: userData
+  //     };
+  //   } catch (error) {
+  //     // При ошибке проверки сессии всегда возвращаем null пользователя
+  //     return {
+  //       success: false,
+  //       user: null
+  //     };
+  //   }
+  // }
+
   async checkSession() {
     try {
       const response = await axiosInstance.get('/api/auth/me');
-      
       const userData = this.#extractUserData(response.data);
-      
+
       if (!userData) {
-        return {
-          success: false,
-          user: null
-        };
+        return { success: false, user: null };
       }
 
       return {
         success: true,
-        user: userData
+        user: userData,
+        accessToken: response.data?.accessToken || null   // ← если 8383 отдаёт
       };
     } catch (error) {
-      // При ошибке проверки сессии всегда возвращаем null пользователя
-      return {
-        success: false,
-        user: null
-      };
+      return { success: false, user: null };
     }
   }
 

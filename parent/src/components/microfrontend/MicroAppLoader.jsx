@@ -22,7 +22,7 @@ const MicroAppLoader = () => {
   const [currentApp, setCurrentApp] = useState(null);
   const [loading, setLoading] = useState(true);
   const containerRef = useRef(null);
-  const { user, organization, isAuthenticated } = useAuth();
+  const { user, organization, isAuthenticated, accessToken} = useAuth();
 
   const sendAuthTokenToChild = useCallback((appId, origin) => {
     let container = appContainers[appId];
@@ -46,26 +46,40 @@ const MicroAppLoader = () => {
       return;
     }
 
-    const token = localStorage.getItem('auth_token') || 
-                  document.cookie.match(/access_token=([^;]+)/)?.[1] ||
-                  getTokenFromCookie();
+    // const token = localStorage.getItem('auth_token') || 
+    //               document.cookie.match(/access_token=([^;]+)/)?.[1] ||
+    //               getTokenFromCookie();
     
-    if (token || user) {
-      const message = {
-        type: 'PARENT_AUTH_TOKEN',
-        token: token,
-        user: user,
-        organization: organization,
-        timestamp: Date.now()
-      };
+    // if (token || user) {
+    //   const message = {
+    //     type: 'PARENT_AUTH_TOKEN',
+    //     token: token,
+    //     user: user,
+    //     organization: organization,
+    //     timestamp: Date.now()
+    //   };
 
-      securityManager.sendSecureMessage(
-        iframe.contentWindow,
-        message,
-        origin
-      );
+    if (!accessToken) {
+      console.warn('⚠️ No accessToken in parent state — cannot authorize iframe');
+      return;
     }
-  }, [user, organization]);
+    
+
+    const message = {
+      type: 'PARENT_AUTH_TOKEN',
+      token: accessToken,           // ← JWT от 8383
+      user: user,
+      organization: organization,
+      timestamp: Date.now()
+    };
+
+
+    securityManager.sendSecureMessage(
+      iframe.contentWindow,
+      message,
+      origin
+    );
+  }, [user, organization, accessToken]);
 
   useEffect(() => {
     const cleanup = securityManager.onMessage((data, origin) => {
@@ -290,15 +304,15 @@ const MicroAppLoader = () => {
   );
 };
 
-function getTokenFromCookie() {
-  const cookies = document.cookie.split(';');
-  for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split('=');
-    if (name === 'session_id' || name === 'auth_token') {
-      return value;
-    }
-  }
-  return null;
-}
+// function getTokenFromCookie() {
+//   const cookies = document.cookie.split(';');
+//   for (let cookie of cookies) {
+//     const [name, value] = cookie.trim().split('=');
+//     if (name === 'session_id' || name === 'auth_token') {
+//       return value;
+//     }
+//   }
+//   return null;
+// }
 
 export default MicroAppLoader;
