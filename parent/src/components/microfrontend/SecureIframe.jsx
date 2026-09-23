@@ -112,7 +112,7 @@ const SecureIframe = ({
   src, 
   title,
   appId,
-  sandbox = 'allow-scripts allow-forms allow-same-origin',
+  sandbox = 'allow-scripts allow-forms allow-same-origin allow-downloads',
   onLoad,
   onError 
 }) => {
@@ -310,4 +310,4 @@ export const clearAllApps = () => {
   containerMounted = false;
 };
 
-export default SecureIframe;
+// export default SecureIframe;

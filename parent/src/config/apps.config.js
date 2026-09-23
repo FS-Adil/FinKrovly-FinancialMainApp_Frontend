@@ -175,6 +175,7 @@ export const defaultAppConfig = {
     allowForms: true,
     allowPopups: false,
     allowSameOrigin: true,
-    allowTopNavigation: false
+    allowTopNavigation: false,
+    allowDownloads: true
   }
 };
