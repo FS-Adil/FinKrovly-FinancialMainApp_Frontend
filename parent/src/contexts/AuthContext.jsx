@@ -13,16 +13,37 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [accessToken, setAccessToken] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Проверяем сессию при загрузке приложения
+  // useEffect(() => {
+  //   const initAuth = async () => {
+  //     try {
+  //       const result = await authService.checkSession();
+  //       if (result.success) {
+  //         setUser(result.user);
+  //       }
+  //     } catch (err) {
+  //       console.error('Session check failed:', err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   initAuth();
+  // }, []);
+
   useEffect(() => {
     const initAuth = async () => {
       try {
         const result = await authService.checkSession();
         if (result.success) {
           setUser(result.user);
+          if (result.accessToken) {
+            setAccessToken(result.accessToken);   // ← ДОБАВИТЬ
+          }
         }
       } catch (err) {
         console.error('Session check failed:', err);
@@ -30,22 +51,41 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     initAuth();
   }, []);
 
   /**
    * Вход в систему
    */
+  // const login = useCallback(async (email, password) => {
+  //   setError(null);
+  //   setLoading(true);
+
+  //   try {
+  //     const result = await authService.login(email, password);
+      
+  //     if (result.success) {
+  //       setUser(result.user);
+  //       return { success: true };
+  //     } else {
+  //       setError(result.error);
+  //       return { success: false, error: result.error };
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, []);
+
   const login = useCallback(async (email, password) => {
     setError(null);
     setLoading(true);
 
     try {
       const result = await authService.login(email, password);
-      
+
       if (result.success) {
         setUser(result.user);
+        setAccessToken(result.accessToken);   // ← ДОБАВИТЬ
         return { success: true };
       } else {
         setError(result.error);
@@ -55,21 +95,31 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }, []);
-
   /**
    * Выход из системы
    */
+  // const logout = useCallback(async () => {
+  //   try {
+  //     await authService.logout();
+  //   } finally {
+  //     setUser(null);
+  //     setError(null);
+  //   }
+  // }, []);
+
   const logout = useCallback(async () => {
     try {
       await authService.logout();
     } finally {
       setUser(null);
+      setAccessToken(null);   // ← ДОБАВИТЬ
       setError(null);
     }
   }, []);
 
   const value = {
     user,
+    accessToken,
     loading,
     error,
     isAuthenticated: !!user,
